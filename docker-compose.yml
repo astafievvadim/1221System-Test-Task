@@ -1,0 +1,23 @@
+services:
+  cooking_db:
+    container_name: diet_db_container
+    image: postgres
+    environment:
+      POSTGRES_USER: diet_db_user
+      POSTGRES_PASSWORD: diet_db_password
+      PGDATA: /var/lib/postgresql/data
+      POSTGRES_DB: diet_db
+    volumes:
+      - postgres:/data/postgres
+    ports:
+      - "9999:5432"
+    networks:
+      - diet_net
+    restart: unless-stopped
+
+networks:
+  diet_net:
+    driver: bridge
+
+volumes:
+  postgres:
